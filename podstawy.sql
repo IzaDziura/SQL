@@ -44,3 +44,35 @@ create table if not exists company(
 	company_id varchar(28) not null unique primary key,
     trade varchar(40) not null,
     number_of_employees int default 0);
+	
+-- stworzenie tabeli job_offer
+-- domyślna wartość dla offer_title to pusty łańcuch znaków
+-- domyślna wartość dla offer_min_salary to 5000
+-- domyślna wartość dla offer_max_salary to null
+-- offer_id powinna być jednoznacznym identyfikatorem
+-- company_id to klucz obcy
+create table if not exists job_offer(
+	offer_id varchar(36) not null unique,
+    offer_title varchar(40) not null default ' ',
+    offer_min_salary decimal(6,0) default 5000,
+    offer_max_salary  decimal(6, 0) default null,
+    company_id varchar(28) not null,
+    foreign key (company_id) references company(company_id));
+	
+-- stworzenie tabeli candidate
+-- COŚ Z KLUCZEM OBCYM
+create table if not exists candidate(
+	candidate_id varchar(36) not null unique,
+    first_name varchar(40) not null default ' ',
+    last_name varchar(40) not null default ' ',
+    email varchar(30) not null,
+    phone_number varchar(12) not null default 'unknow',
+    company_id varchar(28) not null,
+    offer_id varchar(36) not null,
+    foreign key (company_id, offer_id) references company(company_id, offer_id));
+	
+	
+	
+	
+	
+	
