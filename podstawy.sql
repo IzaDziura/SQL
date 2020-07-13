@@ -191,6 +191,20 @@ update movies movie_name='Only for adults' where movie_type='Horror' and movie_r
 update job_offer set offer_title='outdated' where company_id in (select company_id from company where number_of_employees >10000);
 
 
+-- OPCJA DELETE
+
+-- usuń rekordy z tabeli movies
+delete from movies;
+
+-- usuń rekordy z tabeli movies, gdzie movie_type = Action
+delete from movies where movie_type='Action';
+
+-- usuń rekordy z tabeli movies, gdzie movie_rating jest mniejszy niż 15
+delete from movies where movie_rating<15;
+
+-- usuń rekordy z tabeli job_offer, która jest powiązana z firmą zatrudniającą powyżej 200 osób
+delete from job_offer where company_id in (select company_id from company where number_of_employees>200);
+
 
 
 
