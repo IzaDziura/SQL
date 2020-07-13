@@ -176,6 +176,19 @@ INSERT INTO job_offer VALUES(321,'Java developer',6000,10000,1001);
 INSERT INTO job_offer VALUES(322,'QA Engineer',3000,6000,1001);
 
 
+-- OPCJA UPDATE
+
+-- movie_name ma zawierać opcję domyślną tekst "To be done"
+update movies set movie_name = 'To be done';
+
+-- zmień wartość w kolumnie movie_rating na 8, jeżeli w kolumnie movie_type jest wartość Action
+update movies_new set movie_rating=8 where movie_type='Action';
+
+-- zmień wartość w kolumne movie_name na Only for adults, jeżeli movie_type = Horror I movie_rating = 18
+update movies movie_name='Only for adults' where movie_type='Horror' and movie_rating>=18;
+
+-- offer_title z tabeli job_offer ma wyswietlać outdated jeżeli w tabeli company kolumna number_of_employees jest większa niż 10000
+update job_offer set offer_title='outdated' where company_id in (select company_id from company where number_of_employees >10000);
 
 
 
