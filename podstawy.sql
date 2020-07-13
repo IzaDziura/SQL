@@ -1,3 +1,5 @@
+-- OPCJA CREATE
+
 -- stworzenie tabeli movies
 create table movies (
 	movie_id varchar(36),
@@ -70,9 +72,55 @@ create table if not exists candidate(
     company_id varchar(28) not null,
     offer_id varchar(36) not null,
     foreign key (company_id, offer_id) references company(company_id, offer_id));
+
 	
+-- OPCJA ALTER
 	
+-- zmiana nazwy tablicy movies
+alter table movies rename movies_renamed;	
+
+-- doadnie kolumny do istniejącej tabeli
+alter table movies_renamed add movie_director varchar(40); 
 	
+-- dodanie kolumny na pierwsze miejsce
+alter table movies_renamed add id int first;
+
+-- dodanie kolumny movie_description za kolumną movie_name
+alter table movies_renamed add movie_description varchar(255) after movie_name;
+
+-- zmodyfikowanie typu danych jednej kolumny
+alter table movies_renamed modify movie_rating int;
+
+-- usunięcie kolumy z tabeli
+alter table movies_renamed drop movie_director;
+
+-- usunięcie klucza głównego
+alter table movies_renamed drop primary key;
+
+-- dodanie klucza głównego do istniejącej kolumny
+alter table movies_renamed add primary key(movie_id);
+
+-- dodanie klucza obcego fk_candidate_id w kolumnie company_id odnoszącego się do klucza podstaowego company_id z tabeli company
+alter table job_offer add constraint fk_candidate_id foreign key (company_id) references company(company_id);
 	
-	
+-- usunięcie klucza obcego
+
+-- dodanie indeksu do nazwy kolumny
+alter table movies_renamed add index idx_movie_id(movie_id); 
+
+-- usunięcie indeksu
+alter table movies_renamed drop index idx_movie_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
