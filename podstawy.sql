@@ -120,10 +120,60 @@ alter table movies_renamed drop index idx_movie_id;
  drop table job_offer, company;
 
 
+-- OPCJA INSERT
 
+-- wprowadzenie danych do tabeli movies
+insert into movies values ('CXX132D', 'Lord Of The Rings', 'Fantasy', 100);
 
+-- wprowadzenie danych do tabeli movies do dwóch kolumn
+insert into movies(movie_id, movie_name) values ('CXX133D', 'Star Wars');
 
+-- wprowadzenie danych do tabeli movies z wartością null
+insert into movies values ('CXX134D', 'God Father', NULL, 90);
 
+-- wprowadzenie 3 rekordów na raz
+insert into movies values ('CXX135D', 'Good Witch', 'Special', 99),
+						  ('CXX136D', 'Avengers', 'Action', 90),
+						  ('CXX137D', 'Harry Potter', 'Fantasy', 90);
+						  
+-- skopiwanie rekordów do innej tabeli
+insert into movies_new select * from movies;
+
+-- utworzenie tabeli movies 
+-- movie_id nie będzia miała zduplikowanych danych
+-- movie_id automatycznie będzie zwiekszac swoją wartość
+-- jezeli nie będzie wartości w movie_name, automatycznie uzupełni się N/ABS
+create table if not exists movies(
+	movie_id integer not null auto_increment primary key,
+    movie_name varchar(40) not null default 'N/A',
+    movie_rating integer not null);
+	
+insert into movies values (501, 'Lord Of The Rings', 100);
+insert into movies(movie_rating) values (15);
+insert into movies(movie_name, movie_rating) values ('Harry Potter', 90);
+
+-- wprowadzenie pojedyńczego wiersza do tabeli company
+-- company_id nie będzie zawierać zduplikowanych wartości
+create table if not exists company(
+	company_id varchar(28) not null unique primary key,
+    trade varchar(40) not null,
+    number_of_employees int default 0);
+	
+insert into company values (1001, 'Nokia', 800);
+-- sprawdzenie warunku o unikalnym numerze
+insert into company values (1001, 'Samsung', 900);
+
+-- kolumna company_id powinna zawierać artości istniejące w kolumnie company_id w tabeli company
+CREATE TABLE IF NOT EXISTS job_offer(
+	offer_id varchar(36) NOT NULL UNIQUE, 
+    offer_title varchar(40) NOT NULL DEFAULT ' ',
+    offer_min_salary decimal(6,0) DEFAULT 5000,
+    offer_max_salary decimal(6,0) DEFAULT NULL,
+    company_id varchar(28) NOT NULL,
+    FOREIGN KEY (company_id) REFERENCES company(company_id));
+    
+INSERT INTO job_offer VALUES(321,'Java developer',6000,10000,1001);
+INSERT INTO job_offer VALUES(322,'QA Engineer',3000,6000,1001);
 
 
 
