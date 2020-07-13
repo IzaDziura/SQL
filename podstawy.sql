@@ -206,6 +206,25 @@ delete from movies where movie_rating<15;
 delete from job_offer where company_id in (select company_id from company where number_of_employees>200);
 
 
+-- OPCJA SELECT
+
+-- wyświetl wszystko z tabeli movies
+select * from movies;
+
+-- wyświetl kolumny movie_rating i movie_name z tabeli movies
+select movie_rating, movie_name from movies;
+
+-- wyświetl wszytsko dla movie_rating mniejsze niż 14
+select * from movies where movie_rating < 14;
+
+-- wyświetl dane z tabeli job_offer powiązane z firmą, gdzie movie_name rozpoczyna się od IT
+select * from job_offer where company_id in (select company_if from company where trade like 'IT%');
+
+
+
+
+
+
 
 
 	
