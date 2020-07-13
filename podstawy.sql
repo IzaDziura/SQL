@@ -112,6 +112,14 @@ alter table movies_renamed add index idx_movie_id(movie_id);
 alter table movies_renamed drop index idx_movie_id;
 
 
+-- OPCJA DROP
+ -- usunięcie tabeli
+ drop table movies;
+ 
+ -- usinięcie tabel
+ drop table job_offer, company;
+
+
 
 
 
